@@ -1,10 +1,10 @@
-# Third-party sources
+# 원본 프로젝트와 출처
 
-이 저장소의 LICENSE는 이 모음의 문서와 도구 코드에 적용됩니다. 각 원본 프로젝트의 코드·모델·에셋에는 각 원본의 라이선스와 사용 조건이 적용됩니다.
+96개 프로젝트의 링크·설명·적용 메모는 [README.md](README.md), 구조화 목록은 [catalog.json](catalog.json)에 있습니다.
 
-`hub.py fetch`는 원본 Git 저장소를 `tools/`에 내려받습니다. 원본의 이력·저자·라이선스 파일을 유지하며, `tools/`는 이 모음 저장소의 커밋 대상에서 제외됩니다.
-
-각 항목의 원본 URL과 검토한 README의 Git blob SHA는 [catalog.json](catalog.json)에 기록했습니다. blob SHA는 README 내용의 식별자이며 저장소 전체의 commit SHA와 다릅니다.
-
-다운로드한 실제 commit은 `hub.py status`와 각 저장소의 `git rev-parse HEAD`로 확인할 수 있습니다. 원본 다운로드는 기본 브랜치 최신 내용이므로 README 검토 시점과 달라질 수 있습니다.
-
+- 기존 47개 + 추가 49개, 16개 분야. 중복 항목 없음.
+- 신규 항목 메타데이터 출처는 항목별 `metadata_source`, 생성/최근 push 시각은 `created_at`/`pushed_at`에 UTC로 기록합니다.
+- 출처는 원본 저장소 README·공식 문서입니다. 실물·시뮬 실행 성공을 인증하지 않습니다.
+- 허브의 MIT 라이선스는 원본 프로젝트나 모델·데이터·에셋에 적용되지 않습니다.
+- `license_spdx`는 GitHub API 표시값이며, `NOASSERTION` 또는 미표시는 재배포 허가를 뜻하지 않습니다. 실제 LICENSE·모델·데이터 조건을 확인합니다.
+- 다운로드한 원본은 `tools/` 아래 별도 Git checkout이며, 원본 라이선스 파일을 유지합니다.

@@ -60,7 +60,7 @@ def select_items(items: list[dict], *, all_items=False, recommended=False,
                  categories=None, repos=None, allow_default=False) -> list[dict]:
     categories = categories or []
     repos = repos or []
-    available_categories = {item["category"] for item in items}
+    available_categories = {c for item in items for c in [item["category"], *item.get("legacy_categories", [])]}
     unknown_categories = set(categories) - available_categories
     if unknown_categories:
         raise HubError("Unknown categories: " + ", ".join(sorted(unknown_categories)))
@@ -82,7 +82,7 @@ def select_items(items: list[dict], *, all_items=False, recommended=False,
         item for item in items
         if all_items
         or (recommended and item["recommended"])
-        or item["category"] in categories
+        or any(c in categories for c in [item["category"], *item.get("legacy_categories", [])])
         or item["id"] in selected_ids
     ]
 
@@ -148,7 +148,7 @@ def add_selection(parser, *, include_all=True):
         parser.add_argument("--all", action="store_true", dest="all_items",
                             help="Select all repositories.")
     parser.add_argument("--recommended", action="store_true",
-                        help="Select the seven recommended starting points.")
+                        help="Select the recommended starting points.")
     parser.add_argument("--category", action="append", default=[],
                         help="Select a category; repeatable.")
     parser.add_argument("--repo", action="append", default=[],
@@ -168,6 +168,7 @@ def make_parser() -> argparse.ArgumentParser:
     fetching.add_argument("--dry-run", action="store_true", help="Print the plan; write nothing.")
     status = commands.add_parser("status", help="Inspect downloaded checkouts.")
     status.add_argument("--dest", type=Path, default=ROOT / "tools")
+    commands.add_parser("sectors", help="Show sectors and repository counts.")
     commands.add_parser("doctor", help="Show environment information without changing it.")
     return parser
 
@@ -177,6 +178,15 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     try:
         items = load_catalog()
+        if args.command == "sectors":
+            catalog_data = json.loads(CATALOG.read_text(encoding="utf-8"))
+            sectors = catalog_data.get("sectors", {})
+            for key, label in sectors.items():
+                count = sum(item["category"] == key for item in items)
+                print(f"{key:14} {count:3}  {label}")
+            print(f"\n{len(items)} repositories / {len(sectors)} sectors.")
+            return 0
+
         if args.command == "doctor":
             print("Python:", sys.version.split()[0])
             print("Python executable:", sys.executable)
