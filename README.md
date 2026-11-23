@@ -36,7 +36,7 @@ Linux에서 `python` 대신 `python3`를 사용할 수 있습니다. Windows에�
 
 기본 저장 위치는 이 허브 안의 `tools/<owner>--<repository>/`입니다. `--dest /원하는/폴더`로 변경할 수 있습니다. 재실행하면 같은 원본의 기존 폴더를 건너뛰며 수정한 내용을 덮어쓰지 않습니다.
 
-## 형 환경에서의 사용 순서
+## 환경에서의 사용 순서
 
 1. `doctor`로 Git과 Python을 확인합니다.
 2. `fetch --recommended`로 우선 후보의 소스를 받습니다.
