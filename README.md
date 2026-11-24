@@ -1,5 +1,7 @@
 # Robotics MCP Hub
 
+> **새 모음:** [웹 디자인 · Android · 앱 개발 도구 225개 / 18개 분야](DESIGN_APP_DEV.md) · [검색·필터 HTML](design-app-dev.html)
+
 SO-101 · ROS 2 · Isaac Sim을 포함한 로보틱스 도구 **96개 / 16개 분야** 모음입니다.
 기존 47개에 49개를 추가했습니다. 원본 링크·용도·적용 메모를 비교하고 필요한 소스만 내려받을 수 있습니다.
 
